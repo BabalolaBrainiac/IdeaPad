@@ -9,7 +9,7 @@ dotenv.config()
 const app = express();
 
 app.set('PORT', process.env.APP_PORT);
-app.set('ENV', process.env.NODE_ENV);
+app.set('ENV', process.env.APP_ENVIROMENT);
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
