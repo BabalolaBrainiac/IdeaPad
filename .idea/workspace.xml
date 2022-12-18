@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5eef28e6-b311-4ab7-98d8-a1d849403f10" name="Changes" comment="">
+    <list default="true" id="5eef28e6-b311-4ab7-98d8-a1d849403f10" name="Changes" comment="init">
+      <change afterPath="$PROJECT_DIR$/backend/src/handlers/Pagination.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/handlers/UUIDHandler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/repositories/interface/CrudInterface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/services/UserService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/constants/Utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/constants/Utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/handlers/ErrorHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/handlers/ErrorHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/interface/ErrorParams.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/interface/ErrorParams.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,13 +53,16 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;ide.date.format&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;
+    &quot;ts.external.directory.path&quot;: &quot;/Users/opeyemibabalola/Documents/GitHub/IdeaPad/backend/node_modules/typescript/lib&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend" />
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/src/repositories/interface" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -69,6 +80,8 @@
       <workItem from="1671211904193" duration="3160000" />
       <workItem from="1671215371014" duration="2154000" />
       <workItem from="1671217629637" duration="3152000" />
+      <workItem from="1671319285901" duration="2000" />
+      <workItem from="1671319301593" duration="10693000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1671220031337</created>
