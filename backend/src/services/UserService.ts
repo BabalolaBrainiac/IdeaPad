@@ -1,44 +1,48 @@
 import {CrudInterface} from "../repositories/interface/CrudInterface";
 import IUser from "../interface/IUser";
-import {ApplicationError} from "../handlers/ErrorHandler";
-import {Users} from "../mongo/schema/User";
-import {MongoUUIDHelper} from "../handlers/UUIDHandler";
+import {ApplicationError} from "../helpers/ErrorHandler";
+import {MongoUUIDHelper} from "../helpers/UUIDHandler";
 import {ErrorCode, ErrorName} from "../constants/Errors";
-import Logger from "../handlers/Logger";
-import {IPagination, paging} from "../handlers/Pagination";
-import {Either} from "fp-ts/Either";
+import Logger from "../helpers/Logger";
+import {IPagination, paging} from "../helpers/Pagination";
+import {Users} from "../mongo/schema/User";
 
 type UserRepository<IUser> = CrudInterface<IUser>;
 
 export class UserService implements UserRepository<IUser> {
 
-    async create(item: Partial<IUser>): Promise<IUser | Promise<ApplicationError> | void> {
+    async create(item: Partial<IUser>): Promise<IUser | ApplicationError> {
 
         try {
-            let isExist = await Users.findOne(MongoUUIDHelper.juuidStringToBin(item.userId))
+            let isExist = await Users.findOne(item.userId)
             if (isExist) {
-                Logger.error(new Error("User already Exist"))
+                Logger.error(new Error("A User already exists with the following data" + item.email))
+                return new ApplicationError({
+                    name: ErrorName.INTERNAL_SERVER_ERROR,
+                    code: ErrorCode.INTERNAL_SERVER_ERROR,
+                    message: "User already exist."
+                })
             }
 
             const newUser = await Users.create(item)
             Logger.info("User successfully created", newUser)
-
             return newUser
         } catch (err) {
+            Logger.error(new Error("User could not be created") + err);
             return new ApplicationError({
                 name: err.name || ErrorName.INTERNAL_SERVER_ERROR,
                 code: err?.code || ErrorCode.INTERNAL_SERVER_ERROR,
-                message: err.description || "Unable to create new user"
+                message: err.message || "Unable to create new user"
             })
         }
 
     }
 
-    async delete(item: IUser): Promise<void | Promise<ApplicationError>> {
+    async delete(item: IUser): Promise<void | ApplicationError> {
         const {userId} = item;
 
         try {
-            await Users.deleteOne(MongoUUIDHelper.juuidStringToBin(userId)).then((res) => {
+            await Users.deleteOne(MongoUUIDHelper.juuidStringToBin(userId)).then(() => {
                 Logger.info(`User with ID ${userId} has been deleted`)
             });
 
@@ -51,7 +55,7 @@ export class UserService implements UserRepository<IUser> {
         }
     }
 
-    async findAll(item: Partial<IUser>, page: any, size: any): Promise<ApplicationError | Promise<IPagination>> {
+    async findAll(item: Partial<IUser>, page: any, size: any): Promise<IPagination | ApplicationError> {
 
         try {
             const params = {
@@ -82,7 +86,7 @@ export class UserService implements UserRepository<IUser> {
     }
 
 
-    async findById(id: Pick<IUser, "userId">): Promise<IUser | Promise<ApplicationError>> {
+    async findById(id: Pick<IUser, "userId">): Promise<IUser | ApplicationError> {
 
         try {
 
@@ -103,8 +107,7 @@ export class UserService implements UserRepository<IUser> {
         }
     }
 
-
-    async findOne(item: Either<string, Partial<IUser>>): Promise<IUser | Promise<ApplicationError>> {
+    async findOne(item: Partial<IUser>): Promise<IUser | ApplicationError> {
 
         try {
             const params = {
@@ -131,7 +134,6 @@ export class UserService implements UserRepository<IUser> {
             })
         }
     }
-
 
     // isExist(item: Either<string, Partial<IUser>>): Promise<Boolean> | Promise<typeof ApplicationError> {
     //     return Promise.resolve(undefined);
