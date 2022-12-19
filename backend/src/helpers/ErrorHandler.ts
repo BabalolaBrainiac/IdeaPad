@@ -6,7 +6,7 @@ export class ApplicationError extends Error {
     public readonly name: ErrorName | string;
     public readonly errorCode: ErrorCode | undefined;
     public readonly message: string | any;
-    public readonly isOperational: boolean = true;
+    public readonly isActive: boolean = true;
 
     constructor(args: ErrorParams) {
         super(args.message);
@@ -18,7 +18,7 @@ export class ApplicationError extends Error {
         this.message = args.message || ErrorName.INTERNAL_SERVER_ERROR;
 
         if (args.isOperational !== undefined) {
-            this.isOperational = args.isOperational;
+            this.isActive = args.isOperational;
         }
 
     }
